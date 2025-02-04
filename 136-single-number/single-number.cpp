@@ -20,18 +20,26 @@ public:
         // }
 
 
+        // int n=nums.size();
+        // int x;
+        // map<int,int>m;
+        // for(int i=0;i<n;i++){
+        //     m[nums[i]]++;
+        // }
+        // for(auto it:m){
+        //     if(it.second==1){
+        //         x= it.first;
+        //     }
+        // }
+        // return x;
+
+
         int n=nums.size();
-        int x;
-        map<int,int>m;
-        for(int i=0;i<n;i++){
-            m[nums[i]]++;
+        int xorr=0;
+        for(int i =0;i<n;i++){
+            xorr=xorr^nums[i];
         }
-        for(auto it:m){
-            if(it.second==1){
-                x= it.first;
-            }
-        }
-        return x;
+        return xorr;
 
 
         
