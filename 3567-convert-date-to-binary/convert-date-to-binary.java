@@ -4,11 +4,20 @@ class Solution {
         int year=Integer.parseInt(parts[0]);
         int month=Integer.parseInt(parts[1]);
         int data=Integer.parseInt(parts[2]);
-        String yearBin=Integer.toBinaryString(year);
-        String monthBin=Integer.toBinaryString(month);
-        String dateBin=Integer.toBinaryString(data);
+        String yearBin=toBinary(year);
+        String monthBin=toBinary(month);
+        String dateBin=toBinary(data);
         return yearBin + "-" +monthBin + "-" + dateBin;
 
         
+    }
+    public String toBinary(int x){
+        String ans="";
+        while(x!=0){
+            ans=x%2+ans;
+            x=x/2;
+        }
+        
+        return ans;
     }
 }
