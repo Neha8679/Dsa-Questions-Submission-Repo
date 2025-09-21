@@ -1,51 +1,51 @@
 class Solution {
     public int maximalRectangle(char[][] matrix) {
-        int rows=matrix.length;
-        int col=matrix[0].length;
-        int maxarea=0;
-        int[][] prefixsum=new int[rows][col];
-        for(int i=0;i<col;i++){
+        int n=matrix.length;
+        int m=matrix[0].length;
+        int[][] psum=new int[n][m];
+        int maxArea=0;
+        for(int j=0;j<m;j++){
             int sum=0;
-            for(int j=0;j<rows;j++){
+            for(int i=0;i<n;i++){
                 
-                
-                if(matrix[j][i]=='0'){
+                if(matrix[i][j]=='0'){
                     sum=0;
                 }
                 else{
                     sum+=1;
                 }
-                prefixsum[j][i]=sum;
+                psum[i][j]=sum;
             }
-
         }
-        for(int i=0;i<rows;i++){
-            maxarea=Math.max(maxarea,histogram(prefixsum[i]));
+        for(int i=0;i<n;i++){
+            maxArea=Math.max(maxArea,lhist(psum[i]));
         }
-        return maxarea;
+        return maxArea;
         
     }
-    public int histogram(int[] prefixsum ){
-        Stack<Integer> stack = new Stack<>();
-        int maxarea = 0;
-        int n = prefixsum.length;
-
-        for (int i = 0; i < n; i++) {
-            while (!stack.isEmpty() && prefixsum[i] < prefixsum[stack.peek()]) {
-                int height = prefixsum[stack.pop()];
-                int width = stack.isEmpty() ? i : (i - stack.peek() - 1);
-                maxarea = Math.max(maxarea, height * width);
+    public int lhist(int[] psum){
+        int n=psum.length;
+        Stack<Integer> s=new Stack<>();
+        int maxarea=0;
+        for(int i=0;i<n;i++){
+            while(!s.isEmpty() && psum[s.peek()]>psum[i]){
+                int nse=i;
+                int element=s.peek();
+                s.pop();
+                int pse=s.isEmpty()?-1:s.peek();
+                maxarea=Math.max(maxarea,psum[element]*(nse-pse-1));
+                
             }
-            stack.push(i);
+            s.push(i);
+            
         }
-
-        // Handle remaining bars in stack
-        while (!stack.isEmpty()) {
-            int height =prefixsum[stack.pop()];
-            int width = stack.isEmpty() ? n : (n - stack.peek() - 1);
-            maxarea = Math.max(maxarea, height * width);
-        }
-
-        return maxarea;
+        while(!s.isEmpty()){
+                int nse=n;
+                int element=s.peek();
+                s.pop();
+                int pse=s.isEmpty() ?-1: s.peek();
+                maxarea=Math.max(maxarea,psum[element]*(nse-pse-1));
+            }
+            return maxarea;
     }
 }
