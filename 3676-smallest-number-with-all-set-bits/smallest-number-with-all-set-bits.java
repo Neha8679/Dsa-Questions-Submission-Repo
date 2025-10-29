@@ -6,14 +6,16 @@ class Solution {
              s=s+x;
             n=n/2;
         }
-        int m=s.length();
+        // int m=s.length();
         
-        int z=0;
-        for(int j=0;j<m;j++){
-            z=z+(int)Math.pow(2,j);
+        // int z=0;
+        // for(int j=0;j<m;j++){
+        //     z=z+(int)Math.pow(2,j);
 
-        }
-        return z;
+        // }
+        // return z;
+        int m=s.length();
+        return (int)Math.pow(2,m)-1;
 
 
 
