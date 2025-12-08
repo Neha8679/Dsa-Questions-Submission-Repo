@@ -1,22 +1,25 @@
 class Solution {
     public boolean isHappy(int n) {
-        int slow=n;
-        int fast=n;
-        do{
-            slow=square(slow);
-            fast=square(square(fast));
-        }while(slow!=fast);
-        return slow==1;
-
-        
-    }
-    public int square(int num){
-        int ans=0;
-        while(num>0){
-            int remainder=num%10;
-            ans=ans+(remainder*remainder);
-            num=num/10;
+        HashMap<Integer,Integer> map=new HashMap<>();
+         int sum=0;
+        while(sum!=1){
+           sum=0;
+            while(n!=0){
+            int y=n%10;
+            sum=sum+(int) Math.pow(y,2);
+            n=n/10;
+            }
+            if(sum==1){
+                return true;
+            }
+           
+            if(map.containsKey(sum)){
+                return false;
+            }
+            map.put(sum,1);
+            n=sum;
         }
-        return ans;
+        return true;
+        
     }
 }
