@@ -4,15 +4,15 @@ class Solution {
         int buy=prices[0];
         int profit=0;
         int maxprofit=0;
-        for(int i=1;i<n;i++){
+        for(int i=0;i<n;i++){
             int sell=prices[i];
-            if(sell<buy){
+            if(buy>sell){
                 buy=sell;
-            }else{
-            profit=sell-buy;
-            maxprofit=Math.max(profit,maxprofit);
             }
-
+            else{
+                profit=sell-buy;
+                maxprofit=Math.max(profit,maxprofit);
+            }
         }
         return maxprofit;
         
