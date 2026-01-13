@@ -1,45 +1,37 @@
 class Solution {
     public void nextPermutation(int[] nums) {
         int n=nums.length;
-        int index=-1;
-        for(int i=n-2;i>=0;i--){
-            if(nums[i]<nums[i+1]){
-                index=i;
-                break;
-            }
-
-
-        }
-        if(index==-1){
-            int l=0;
-            int r=n-1;
-            while(l<r){
-                int temp=nums[l];
-                nums[l]=nums[r];
-                nums[r]=temp;
-                l++;
-                r--;
-            }
-        }
-       else{
-        for(int b=n-1;b>index;b--){
-            if(nums[b]>nums[index]){
-                int temp=nums[b];
-                nums[b]=nums[index];
-                nums[index]=temp;
+        int breakpoint=-1;
+        for(int i=n-1;i>=1;i--){
+            if(nums[i-1]<nums[i]){
+                breakpoint=i-1;
                 break;
             }
         }
-        int k=index+1;
-        int m=n-1;
-        while(k<m){
-            int temp=nums[k];
-            nums[k]=nums[m];
-            nums[m]=temp;
-            k++;
-            m--;
+        if(breakpoint==-1){
+            reverse(nums,0,n-1);
+            return;
+
         }
-       }
+        for(int i=n-1;i>breakpoint;i--){
+            if(nums[i]>nums[breakpoint]){
+                int temp=nums[i];
+                nums[i]=nums[breakpoint];
+                nums[breakpoint]=temp;
+                break;
+            }
+        }
+       reverse(nums,breakpoint+1,n-1);
         
+    }
+    public int[] reverse(int[] nums,int x,int y){
+        while(x<y){
+            int temp=nums[x];
+            nums[x]=nums[y];
+            nums[y]=temp;
+            x++;
+            y--;
+        }
+        return nums;
     }
 }
