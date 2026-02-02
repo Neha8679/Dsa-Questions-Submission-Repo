@@ -1,23 +1,37 @@
 class Solution {
     public void rotate(int[] nums, int k) {
-        int n = nums.length;
-        k = k % n;
+        int n=nums.length;
+        k=k%n;
+        int l1=0;
+        int r1=n-1;
+        while(l1<r1){
+            int temp=nums[l1];
+            nums[l1]=nums[r1];
+            nums[r1]=temp;
+            l1++;
+            r1--;
 
-        int[] arr = new int[n];
-
-        // place the last k elements at the front
-        for (int i = 0; i < k; i++) {
-            arr[i] = nums[n - k + i];
+        }
+        int l2=0;
+        int r2=k-1;
+        while(l2<r2){
+            int temp=nums[l2];
+            nums[l2]=nums[r2];
+            nums[r2]=temp;
+            l2++;
+            r2--;
+        }
+        int l3=k;
+        int r3=n-1;
+        while(l3<r3){
+            int temp=nums[l3];
+            nums[l3]=nums[r3];
+            nums[r3]=temp;
+            l3++;
+            r3--;
         }
 
-        // place the first n-k elements after them
-        for (int i = 0; i < n - k; i++) {
-            arr[i + k] = nums[i];
-        }
 
-        // copy arr → nums
-        for (int i = 0; i < n; i++) {
-            nums[i] = arr[i];
-        }
+        
     }
 }
